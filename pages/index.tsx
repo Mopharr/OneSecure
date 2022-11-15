@@ -19,9 +19,9 @@ export default function Home() {
 
       <main className={style.main}>
         <header className={style.header}>
-          <nav className={style.nav}>
+          <Link href="/"  className={style.nav}>
             <img src="/os10.png" alt="" />
-          </nav>
+          </Link>
           <div className={style.headCon}>
             <div className={style.text}>
               <h2>All in one identity verification system for businesses</h2>

@@ -13,67 +13,57 @@ import { GrFormCheckmark } from "react-icons/gr";
 import { BiErrorCircle } from "react-icons/bi";
 import gToken from "./components/getToken";
 
-interface FormInput {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
-const schema = yup.object({
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
-  email: yup.string().required(),
-  password: yup.string().required().max(16).min(8),
-});
+
+
 
 const Create = () => {
   const [loading, setLoading] = useState(false);
-  const timer: any = useRef();
-  const [success, setSuccess] = useState(false);
-  const [err, setErr] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormInput>({
-    resolver: yupResolver(schema),
-  });
-  let Da: any = gToken();
-  let accessToken = Da?.access;
+    const [signUp, setSignUP] = useState({
+      firstname: "",
+      lastname: "",
+      email: "",
+      password: "",
+    });
 
 
+   const handleChange = ({ target: { name, value }, }:any) => {
+     setSignUP({ ...signUp, [name]: value });
+   };
 
-  const onSubmit = (data: FormInput) => {
+  const onSubmit = ( ) => {
+   gToken();
+   const token = window.localStorage.getItem("token")?.replace(/['"]+/g, "");
+   const accToken = "Bearer " + token;
     setLoading(true);
-    timer.current = window.setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-
-    Da = gToken();
-    accessToken = "Bearer " + Da.access;
+    
     const headers = {
-      "Content-Type": "application/json",
-      Authorization: `${accessToken}`,
-    };
+      Authorization: `${accToken}`,
+     };
     axios
-      .post("https://authapitest.herokuapp.com/regUser", {
-        headers: headers,
-        data,
-      })
+      .post(
+        "https://authapitest.herokuapp.com/regUser",
+        {
+          firstname: signUp.firstname.trim(),
+          lastname: signUp.lastname.trim(),
+          email: signUp.email.trim(),
+          password: signUp.password.trim(),
+        },
+        {
+          headers: headers,
+        }
+      )
       .then((res: any) => {
-        setSuccess(true);
-        timer.current = window.setTimeout(() => {
-          setSuccess(false);
-        }, 4000);
-        setErr(false);
+       
+         setSignUP({
+           firstname: "",
+           lastname: "",
+           email: "",
+           password: "",
+         });
       })
       .catch((error) => {
         console.log(error);
-        setSuccess(false);
-        setErr(true);
-        timer.current = window.setTimeout(() => {
-          setErr(false);
-        }, 4000);
+        
       });
   };
   return (
@@ -85,23 +75,7 @@ const Create = () => {
       </Head>
 
       <main className={style.main}>
-        {success ? (
-          <div>
-            <p>
-              {" "}
-              <GrFormCheckmark /> login was successful
-            </p>
-          </div>
-        ) : null}
-
-        {err ? (
-          <div className={success ? "none" : "show"}>
-            <p>
-              <BiErrorCircle />
-              login failed
-            </p>
-          </div>
-        ) : null}
+  
 
         <div className={style.rightBa}>
           <div className={style.right}>
@@ -114,37 +88,49 @@ const Create = () => {
               All your personal information, identity documents and more all in
               one place.
             </p>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit}>
               <div className={style.input}>
                 <input
                   type="text"
-                  {...register("firstName")}
+                  name="firstname"
+                  value={signUp.firstname}
+                  onChange={handleChange}
+                  required
                   placeholder="First Name"
                 />
               </div>
               <div className={style.input}>
                 <input
                   type="text"
-                  {...register("lastName")}
-                  placeholder="First Name"
+                  name="lastname"
+                  placeholder="Last name"
+                  value={signUp.lastname}
+                  onChange={handleChange}
+                  required
                 />
               </div>
               <div className={style.input}>
                 <input
                   type="email"
-                  {...register("email")}
+                  name="email"
                   placeholder="Email"
+                  value={signUp.email}
+                  onChange={handleChange}
+                  required
                 />
               </div>
               <div className={style.input}>
                 <input
                   type="password"
-                  {...register("password")}
+                  name="password"
                   placeholder="Password"
+                  value={signUp.password}
+                  onChange={handleChange}
+                  required
                 />
               </div>
 
-              <button>
+              <button type="submit">
                 {loading ? (
                   <CircularProgress size={30} sx={{ color: "white" }} />
                 ) : (

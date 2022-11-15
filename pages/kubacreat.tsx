@@ -17,9 +17,9 @@ const Kcreate = () => {
       <main className={style.main}>
         <div className={style.rightBa}>
           <div className={style.right}>
-            <div className={style.logo}>
-              <img src="/logo.png" alt="logo" /> <span>Kuda Bank</span>
-            </div>
+            <Link href="/"  className={style.logo}>
+              <img src="/kuda.png" alt="logo" /> <span>Kuda Bank</span>
+            </Link>
 
             <h2>Create a account</h2>
             <p>We’re the bank of the free</p>

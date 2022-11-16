@@ -348,6 +348,7 @@
 }
 
 .right button {
+  width: 480px;
   height: 60px;
   margin-top: 2em;
   background: #000000;
@@ -491,6 +492,9 @@
     width: 98%;
     font-size: 20px;
     text-align: center;
+  }
+  .right button {
+    width: 98%;
   }
 
   .right h4 {

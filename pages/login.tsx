@@ -2,38 +2,42 @@ import style from "../styles/create.module.css";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import gToken from "./components/getToken";
-
+import CircularProgress from "@mui/material/CircularProgress";
 import { useRouter } from "next/router";
 
 const Login = () => {
-  const timer = useRef();
+  const timer: any = useRef();
   const [err, setErr] = useState(false);
   const [sign, setSign] = useState({
     email: "",
     password: "",
   });
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const handleChange = ({ target: { name, value } }: any) => {
     setSign({ ...sign, [name]: value });
   };
+  useEffect(() => {
+    gToken();
+  }, []);
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    gToken();
     const token = window.localStorage.getItem("token")?.replace(/['"]+/g, "");
     const accToken = "Bearer " + token;
+
+    setLoading(true);
 
     const headers = {
       Authorization: `${accToken}`,
     };
-
     axios
       .post(
-        "https://authapitest.herokuapp.com/auth",
+        "https://authapitest.herokuapp.com/fetchUserProfile",
         {
           email: sign.email,
           password: sign.password,
@@ -43,17 +47,28 @@ const Login = () => {
         }
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         setSign({
           email: "",
           password: "",
         });
+        window.localStorage.setItem("firstname", res.data.firstname);
+        window.localStorage.setItem("lastname", res.data.lastname);
+        window.localStorage.setItem("nin", res.data.nin_status);
+        window.localStorage.setItem("email", res.data.email);
+
+        timer.current = window.setTimeout(() => {
+          setLoading(false);
+        }, 5000);
+
         setErr(false);
-        router.push("/dashboard");
+        router.push("/kubaverify");
       })
       .catch((error) => {
         console.log(error);
         setErr(true);
+        setLoading(false);
+
       });
   };
   return (
@@ -99,7 +114,13 @@ const Login = () => {
                 />
               </div>
 
-              <button type="submit">Create Account</button>
+              <button type="submit">
+                {loading ? (
+                  <CircularProgress size={30} sx={{ color: "white" }} />
+                ) : (
+                  "Login"
+                )}
+              </button>
             </form>
             <p className={style.login}>
               Don&lsquo;t have a OneSecure <br /> account?

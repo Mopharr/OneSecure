@@ -1,16 +1,15 @@
 import style from "../styles/create.module.css";
 import Head from "next/head";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import gToken from "./components/getToken";
 import { useRouter } from "next/router";
-import { Router } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
+
 
 const Create = () => {
+  const timer: any = useRef();
   const [sign, setSign] = useState({
     firstname: "",
     lastname: "",
@@ -19,16 +18,21 @@ const Create = () => {
   });
 
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
   const handleChange = ({ target: { name, value } }: any) => {
     setSign({ ...sign, [name]: value });
   };
 
+  useEffect(() => {
+    gToken();
+  }, []);
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    gToken();
     const token = window.localStorage.getItem("token")?.replace(/['"]+/g, "");
     const accToken = "Bearer " + token;
 
+    setLoading(true);
     const headers = {
       Authorization: `${accToken}`,
     };
@@ -47,17 +51,27 @@ const Create = () => {
         }
       )
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         setSign({
           firstname: "",
           lastname: "",
           email: "",
           password: "",
         });
-        router.push('/dashboard ')
+         window.localStorage.setItem("firstname", res.data.firstname);
+         window.localStorage.setItem("lastname", res.data.lastname);
+         window.localStorage.setItem("nin", res.data.nin_status);
+         window.localStorage.setItem("email", res.data.email);
+        timer.current = window.setTimeout(() => {
+          setLoading(false);
+        }, 5000);
+
+        router.push("/login ");
       })
       .catch((error) => {
         console.log(error);
+          setLoading(false);
+
       });
   };
 
@@ -125,7 +139,13 @@ const Create = () => {
                 />
               </div>
 
-              <button type="submit">Create Account</button>
+              <button type="submit">
+                {loading ? (
+                  <CircularProgress size={30} sx={{ color: "white" }} />
+                ) : (
+                  "Create Account"
+                )}
+              </button>
             </form>
 
             <p className={style.login}>

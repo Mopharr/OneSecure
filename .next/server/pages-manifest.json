@@ -1,20 +1,7 @@
 {
   "/_app": "pages/_app.js",
-  "/api/hello": "pages/api/hello.js",
-  "/components/getToken": "pages/components/getToken.html",
-  "/dashboard": "pages/dashboard.html",
-  "/": "pages/index.html",
-  "/kubacreat": "pages/kubacreat.html",
-  "/kubaverify": "pages/kubaverify.html",
-  "/kubaverify2": "pages/kubaverify2.html",
-  "/kubaverify3": "pages/kubaverify3.html",
-  "/kubaverify4": "pages/kubaverify4.html",
-  "/kubaverify5": "pages/kubaverify5.html",
-  "/login": "pages/login.html",
-  "/newS": "pages/newS.html",
-  "/signUp": "pages/signUp.html",
-  "/verify": "pages/verify.html",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/404": "pages/404.html"
+  "/kubaverify3": "pages/kubaverify3.js",
+  "/kubaverify4": "pages/kubaverify4.js"
 }

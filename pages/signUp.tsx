@@ -6,10 +6,13 @@ import axios from "axios";
 import gToken from "./components/getToken";
 import { useRouter } from "next/router";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import { BiErrorCircle } from "react-icons/bi";
 
 const Create = () => {
   const timer: any = useRef();
+  const [success, setSuccess] = useState(false);
+  const [err, setErr] = useState(false);
   const [sign, setSign] = useState({
     firstname: "",
     lastname: "",
@@ -58,20 +61,27 @@ const Create = () => {
           email: "",
           password: "",
         });
-         window.localStorage.setItem("firstname", res.data.firstname);
-         window.localStorage.setItem("lastname", res.data.lastname);
-         window.localStorage.setItem("nin", res.data.nin_status);
-         window.localStorage.setItem("email", res.data.email);
+        window.localStorage.setItem("firstname", res.data.firstname);
+        window.localStorage.setItem("lastname", res.data.lastname);
+        window.localStorage.setItem("nin", res.data.nin_status);
+        window.localStorage.setItem("email", res.data.email);
+        setSuccess(true);
         timer.current = window.setTimeout(() => {
           setLoading(false);
+          setSuccess(false);
         }, 5000);
+        setErr(false);
 
         router.push("/login ");
       })
       .catch((error) => {
         console.log(error);
-          setLoading(false);
-
+        setLoading(false);
+        setSuccess(false);
+        setErr(true);
+        timer.current = window.setTimeout(() => {
+          setErr(false);
+        }, 5000);
       });
   };
 
@@ -84,6 +94,23 @@ const Create = () => {
       </Head>
 
       <main className={style.main}>
+        {success ? (
+          <div className={style.suc}>
+            <p>
+              <AiOutlineCheckCircle className={style.sIcon} /> sign up was
+              successful
+            </p>
+          </div>
+        ) : null}
+
+        {err ? (
+          <div className={style.err}>
+            <p>
+              <BiErrorCircle className={style.sIcon} />
+              sign up failed
+            </p>
+          </div>
+        ) : null}
         <div className={style.rightBa}>
           <div className={style.right}>
             <Link href="/" className={style.logo}>

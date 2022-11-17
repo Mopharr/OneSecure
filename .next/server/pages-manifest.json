@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/kubaverify3": "pages/kubaverify3.js",
-  "/kubaverify4": "pages/kubaverify4.js"
+  "/kubaverify": "pages/kubaverify.js",
+  "/kubaverify3": "pages/kubaverify3.js"
 }

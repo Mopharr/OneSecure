@@ -89,7 +89,11 @@ const Kverify = () => {
             </div>
 
             <button>
-              <Link href="/kubaverify2">Input your NIN</Link>
+              {nin_status === "false" ? (
+                <Link href="/kubaverify2">Input your NIN</Link>
+              ) : (
+                <Link href="/kubaverify3">Continue</Link>
+              )}
             </button>
           </div>
         </div>

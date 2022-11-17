@@ -8,6 +8,8 @@ import { useRouter } from "next/router";
 import gToken from "./components/getToken";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
+import { AiOutlineCheckCircle } from "react-icons/ai";
+import { BiErrorCircle } from "react-icons/bi";
 
 const Kverify2 = () => {
   let emailL: any;
@@ -15,6 +17,7 @@ const Kverify2 = () => {
     emailL = window.localStorage.getItem("email");
   }
   const timer: any = useRef();
+  const [success, setSuccess] = useState(false);
   const [err, setErr] = useState(false);
   const [val, setval] = useState({
     email: emailL,
@@ -42,7 +45,7 @@ const Kverify2 = () => {
     };
     axios
       .post(
-        "https://authapitest.herokuapp.com/updateProfile",
+        "https://authapitest.herokuapp.com/update_vnin",
         {
           email: val.email,
           virtualnin: val.virtualnin,
@@ -57,19 +60,23 @@ const Kverify2 = () => {
           email: "",
           virtualnin: "",
         });
-    
 
+        setSuccess(true);
         timer.current = window.setTimeout(() => {
           setLoading(false);
+          setSuccess(false);
         }, 5000);
-
         setErr(false);
         router.push("/kubaverify3");
       })
       .catch((error) => {
         console.log(error);
-        setErr(true);
         setLoading(false);
+        setSuccess(false);
+        setErr(true);
+        timer.current = window.setTimeout(() => {
+          setErr(false);
+        }, 5000);
       });
   };
 
@@ -82,6 +89,23 @@ const Kverify2 = () => {
       </Head>
 
       <main className={style.main}>
+        {success ? (
+          <div className={style.suc}>
+            <p>
+              <AiOutlineCheckCircle className={style.sIcon} /> sign up was
+              successful
+            </p>
+          </div>
+        ) : null}
+
+        {err ? (
+          <div className={style.err}>
+            <p>
+              <BiErrorCircle className={style.sIcon} />
+              sign up failed
+            </p>
+          </div>
+        ) : null}
         <div className={style.rightBa}>
           <div className={style.right}>
             <Link href="/" className={style.logo}>
@@ -118,7 +142,7 @@ const Kverify2 = () => {
                 {loading ? (
                   <CircularProgress size={30} sx={{ color: "white" }} />
                 ) : (
-                  "Login"
+                  "Continue"
                 )}
               </button>
             </form>

@@ -435,6 +435,52 @@
   line-height: 33px;
   color: #ffffff;
 }
+.suc{
+  position: absolute;
+  z-index: 1;
+  top: 3%;
+  width: 406px;
+  margin: auto;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #10b981;
+  border-radius: 5px;
+}
+
+.err {
+    position: absolute;
+  z-index: 1;
+  top: 3%;
+  width: 406px;
+  margin: auto;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ef4444;
+  border-radius: 5px;
+}
+.suc p, .err p {
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 17px;
+  color: #ffffff;
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  display: flex;
+  align-items: center;
+  justify-self: center;
+}
+.sIcon {
+  font-size: 25px;
+  margin-right: .5em;
+  color: #fff;
+}
 
 @media (max-width: 1350px) {
   .leftBa img {
@@ -518,6 +564,10 @@
   }
   .nums2 .line2 {
     width: 100px;
+  }
+    .suc, .err {
+    width: 95%;
+    margin: auto;
   }
 }
 

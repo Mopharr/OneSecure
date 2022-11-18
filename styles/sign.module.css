@@ -182,7 +182,8 @@
     font-weight: 600;
     font-size: 18px;
     line-height: 33px;
-    color: #000000;
+      color: rgba(0, 0, 0, 0.38);
+
     background: transparent;
 }
 .left label{

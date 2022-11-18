@@ -8,10 +8,12 @@ const Kverify = () => {
   let firstname: any;
   let lastname: any;
   let nin_status: any;
+  let ninNum: any;
   if (typeof window !== "undefined") {
     firstname = window.localStorage.getItem("firstname");
     lastname = window.localStorage.getItem("lastname");
     nin_status = window.localStorage.getItem("nin");
+    ninNum = window.localStorage.getItem("virtualnin");
   }
 
   return (
@@ -42,7 +44,7 @@ const Kverify = () => {
                 style={{ width: "90%" }}
                 type="text"
                 placeholder="First Name"
-                value={firstname}
+                // value={firstname}
                 disabled
               />
 
@@ -57,7 +59,7 @@ const Kverify = () => {
                 style={{ width: "90%" }}
                 type="text"
                 placeholder="Last Name"
-                value={lastname}
+                // value={lastname}
                 disabled
               />
               {lastname === "" ? (
@@ -72,6 +74,7 @@ const Kverify = () => {
                   style={{ width: "90%" }}
                   type="text"
                   placeholder="NIN"
+                  // value={ninNum}
                   disabled
                 />
                 {nin_status === "false" ? (
@@ -90,7 +93,7 @@ const Kverify = () => {
 
             <button>
               {nin_status === "false" ? (
-                <Link href="/kubaverify2">Input your NIN</Link>
+                <Link href="/dashboard">Return to OneSecure</Link>
               ) : (
                 <Link href="/kubaverify3">Continue</Link>
               )}

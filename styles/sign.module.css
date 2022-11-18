@@ -156,6 +156,42 @@
   line-height: 30px;
 }
 
+
+.inputNin {
+    width: 400px;
+    height: 60px;
+    left: 120px;
+    top: 383px;
+    background: #ffffff;
+    border: .5px solid rgb(216, 216, 216);
+    border-radius: 10px;
+    outline: none;
+    margin-bottom: 1em;
+    display: flex;
+    align-items: center;
+}
+.inputNin input {
+  width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding-left: 1em;
+    font-family: "Poppins", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 33px;
+    color: #000000;
+    background: transparent;
+}
+.left label{
+      font-size: 10px;
+    width: 100% !important;
+    margin: 0 0 -1em 0 !important;
+}
+
+
 @media (max-width: 1440px) {
   .info,
   .nav {
@@ -183,6 +219,9 @@
 
   .right,
   .left {
+    width: 97%;
+  }
+  .inputNin {
     width: 97%;
   }
 }

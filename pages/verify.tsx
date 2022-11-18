@@ -28,7 +28,7 @@ const Verify = () => {
             </span>
 
             <button>
-              <Link href="/signUp">Create Account</Link>
+              <Link href="/signUp">Proceed  </Link>
             </button>
           </div>
         </div>

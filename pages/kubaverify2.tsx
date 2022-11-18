@@ -92,8 +92,7 @@ const Kverify2 = () => {
         {success ? (
           <div className={style.suc}>
             <p>
-              <AiOutlineCheckCircle className={style.sIcon} /> sign up was
-              successful
+              <AiOutlineCheckCircle className={style.sIcon} /> NIN update successfully
             </p>
           </div>
         ) : null}
@@ -102,7 +101,7 @@ const Kverify2 = () => {
           <div className={style.err}>
             <p>
               <BiErrorCircle className={style.sIcon} />
-              sign up failed
+              An error occur
             </p>
           </div>
         ) : null}

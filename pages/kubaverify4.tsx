@@ -37,7 +37,7 @@ const Kverify4 = () => {
             <button>
               <Link href="/">Go to Homepage</Link>
             </button>
-            <Link href="/dashboard" className={style.back}>
+            <Link href="/dashboard2" className={style.back}>
               Go to my OneSecure dashboard
             </Link>
           </div>

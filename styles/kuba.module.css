@@ -250,14 +250,37 @@
 .inner input {
   width: 100%;
   height: 100%;
-  background-color: rebeccapurple;
+  background-color: transparent;
   position: absolute;
-  opacity: 0;
+  /* opacity: 0; */
   cursor: pointer;
 }
 .capIcon {
   font-size: 70px;
 }
+.imgSuc{
+  color: #018c0f !important;
+  font-size: 20px;
+    font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600 !important;
+  line-height: 42px;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}
+.imgErr{
+  color: #ef4444 !important;
+  font-size: 20px;
+    font-family: "Poppins", sans-serif;
+  font-style: normal;
+  font-weight: 600 !important;
+  line-height: 42px;
+  text-align: center;
+  color: #000000;
+  margin: 0;
+}
+
 
 .inputCapp {
   height: 259px;

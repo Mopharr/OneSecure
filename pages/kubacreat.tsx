@@ -3,7 +3,7 @@ import Head from "next/head";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Link from "next/link";
-import Image from 'next/image'
+import Image from "next/image";
 
 const Kcreate = () => {
   return (
@@ -17,7 +17,7 @@ const Kcreate = () => {
       <main className={style.main}>
         <div className={style.rightBa}>
           <div className={style.right}>
-            <Link href="/"  className={style.logo}>
+            <Link href="/" className={style.logo}>
               <img src="/kuda.png" alt="logo" /> <span>Kuda Bank</span>
             </Link>
 
@@ -28,16 +28,13 @@ const Kcreate = () => {
               <input type="text" placeholder="Email" />
             </div>
             <div className={style.input}>
-              <input type="text" placeholder="Password" />
+              <input type="password" placeholder="Password" />
             </div>
 
             <button>
               <Link href="/verify">Create Account</Link>
             </button>
 
-            <span className={style.or}>Or</span>
-
-            <button className={style.btnn}>Sign up with google</button>
             <p className={style.login}>
               Already have a OneSecure <br /> accountt?
               <Link className={style.loginC} href="/">
